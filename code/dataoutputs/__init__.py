@@ -1,0 +1,4 @@
+# dataoutputs文件夹中是根据model输出的prediction数据（矩阵）得到音乐内容的方法
+# predictions.py是根据model输出的prediction概率矩阵生成prediction一维向量
+# validation.py是根据一些规则检查prediction向量是否符合要求
+# musicout.py是根据prediction向量得到piano roll

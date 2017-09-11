@@ -1,0 +1,9 @@
+MidiData/
+Outputs/*
+OldCode/
+G.txt
+trash.txt
+*.mid
+.~lock.algorithm.docx#
+.idea/
+__pycache__/
