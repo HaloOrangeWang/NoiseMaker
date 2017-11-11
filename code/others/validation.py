@@ -34,9 +34,9 @@ def ChordValidation():
     # 1.准备工作
     conn = sqlite3.connect(DATASET_PATH)
     chord_data = [[] for t in range(TRAIN_FILE_NUMBERS)]
-    normal_chord = [1, 5, 6, 14, 26, 31, 43, 56, 59, 60, 70]  # 1/4/5级大三和弦，2/3/6级小三和弦，7级减三和弦，1/6级挂二挂四和弦是调内和弦 其余为离调和弦
+    normal_chord = [1, 5, 6, 14, 26, 31, 43, 56, 59, 60, 70, 73, 80, 88, 96, 101]  # 1/4/5级大三和弦，2/3/6级小三和弦，7级减三和弦，1/6级挂二挂四和弦 1/4级大七和弦 5级属七和弦 2/6级小七和弦是调内和弦 其余为离调和弦
     # 2.从数据集中读取歌的编号为song_id且小节标注为mark_key的小节数据，并将所有不为休止符的位置全部替换为1
-    rows = conn.execute('select bar_index, data, song_id from BarChordInfo')
+    rows = conn.execute('select bar_index, data, song_id from BarInfo where mark=\'chord\'')
     for row in rows:
         # 由于在数据库中歌的id是从1开始编号的，因此需要减一
         chord_data[row[2]-1] += eval(row[1])

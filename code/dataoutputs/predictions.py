@@ -32,3 +32,20 @@ def ChordPrediction(predict_matrix):
             random_value -= row_sum_array[element]
             if random_value < 0:
                 return element + 1
+
+
+def GetFirstMelodyPattern(pattern_number_list, min_pattern_number, max_pattern_number):
+    """
+
+    :param pattern_number_list: 各种pattern在训练集中出现的次数
+    :param min_pattern_number: 选取的pattern在序列中的最小值
+    :param max_pattern_number: 选取的pattern在序列中的最大值
+    :return: 选取的pattern的代码
+    """
+    row_sum = sum(pattern_number_list[min_pattern_number: (max_pattern_number + 1)])
+    random_value = random.random() * row_sum
+    for element in range(len(pattern_number_list[min_pattern_number: (max_pattern_number + 1)])):
+        random_value -= pattern_number_list[min_pattern_number: (max_pattern_number + 1)][element]
+        if random_value < 0:
+            return element + min_pattern_number
+    return max_pattern_number

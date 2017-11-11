@@ -1,6 +1,7 @@
 import sqlite3
 from settings import *
 from interfaces.midi.midi import GenerateDataFromMidiFile
+from interfaces.chord_parse import NoteList2Chord
 
 
 def StoreMidiFileInfo():
@@ -101,38 +102,44 @@ class SaveMidiData:
                 print(train_file_iterator)
                 # print(file_path, bpm_list[train_file_iterator], start_time_list[train_file_iterator], scale_list[train_file_iterator])
                 midi_data = GenerateDataFromMidiFile(file_path, bias_time_list[train_file_iterator], scale_list[train_file_iterator])
-                self.get_music_data(train_file_iterator, midi_data.pianoroll_list, eliminate=['main', 'chord', 'others'])  # 训练数据
+                self.get_music_data(train_file_iterator, midi_data.pianoroll_list, time_step_dict={'piano_guitar': 0.25, 'string': 0.25}, eliminate=['main', 'chord', 'others'])
                 # 把main和chord去掉意思就是主旋律和和弦部分单独处理
                 if 'main' in midi_data.pianoroll_list:
                     self.get_melody_data(train_file_iterator, midi_data.pianoroll_list)
                 if 'chord' in midi_data.pianoroll_list:  # 只有在这首歌有和弦的时候才训练和弦
                     self.get_chord_data(train_file_iterator, midi_data.pianoroll_list, tone=tone_list[train_file_iterator])
-            if train_file_iterator == 0:
-                print(self.note_dict)
-                for t in range(len(self.music_data[0]['drum'])):
-                    print(t, self.music_data[0]['drum'][t])
-        # print(self.melody_data[0])
-        # print(self.melody_data[2])
-        # print(self.melody_data[98])
-        # print('\n\n\n')
-        # print(self.chord_data[0])
-        # print(self.chord_data[2])
-        # print(self.chord_data[98])
+            # if train_file_iterator in [0, 2]:
+            #     print(self.note_dict)
+            #     for t in range(len(self.music_data[train_file_iterator]['piano_guitar1'])):
+            #         print(t, self.music_data[train_file_iterator]['piano_guitar1'][t])
+            #     print('\n\n\n')
+            #     for t in range(len(self.chord_data[train_file_iterator])):
+            #         print(t, self.chord_data[train_file_iterator][t])
+            #     print('\n\n\n')
+            #     for t in range(len(self.melody_data[train_file_iterator])):
+            #         print(t, self.melody_data[train_file_iterator][t])
+            #     print('\n\n\n')
         # 5.把这些音符存储在sqlite中
         self.save_music_data()
         self.save_chord_data()
         self.save_melody_data()
 
-    def get_music_data(self, music_number_index, pianoroll_list, time_step=1 / 8, eliminate=None):
+    def get_music_data(self, music_number_index, pianoroll_list, default_time_step=1 / 8, time_step_dict={}, eliminate=None):
         """
         将音符组合保存为以time_step拍为步长的数组，方便存储到sql中
+        :param default_time_step: 如果key不在time_step_dict中 默认的time_step是多少
+        :param time_step_dict: 时间步长
         :param music_number_index: Midi文件的编号
         :param pianoroll_list: 音符列表
-        :param time_step: 时间步长
         :param eliminate: 那些音轨里的音符不保存
         :return:
         """
         for key in pianoroll_list:
+            time_step = default_time_step
+            for time_step_key in time_step_dict:  # 从0.92.05开始 因为各项标注的音符time_step不全为1/8 所以加入time_step_dict
+                if time_step_key in key:  # 比如time_step_key'piano_guitar'完全包含在key'piano_guitar1'中
+                    time_step = time_step_dict[time_step_key]
+            # print(key, time_step)
             if key not in eliminate:
                 if not pianoroll_list[key]:  # 这个音轨为空 那么直接跳过这个音轨
                     continue
@@ -147,7 +154,7 @@ class SaveMidiData:
                         # 1.1.1.读取这个时间步长中所有的音符 保存在列表中
                         raw_time_data = set()  # 将同一个时间上所有的音都存在这里。这里永set而不是list是因为要去除相同音符
                         if current_note_ < len(pianoroll_list[key]):
-                            while pianoroll_list[key][current_note_][0] == bar_iterator * 4 + note_time_iterator * time_step:
+                            while pianoroll_list[key][current_note_][0] <= bar_iterator * 4 + (note_time_iterator + 0.5) * time_step:
                                 raw_time_data.add(pianoroll_list[key][current_note_][1])  # 只保存音高
                                 current_note_ += 1
                                 if current_note_ >= len(pianoroll_list[key]):
@@ -179,13 +186,13 @@ class SaveMidiData:
         current_note_ = 0  # 当前音符
         # 1.逐小节读取数据
         for bar_iterator in range(bar_number):
-            bar_melody_data = [0 for t in range(round(4 / MELODY_TIME_STEP))]  # 一小节4拍 没拍1/TIME_STEP个和弦 比较奇怪的未知和弦记为0
+            bar_melody_data = [0 for t in range(32)]  # 一小节4拍 没拍1/TIME_STEP个和弦 比较奇怪的未知和弦记为0
             # 1.1.对每一个时间步长读取音符并保存在bar_data中
-            for note_time_iterator in range(round(4 / MELODY_TIME_STEP)):
+            for note_time_iterator in range(32):
                 # 1.1.1.读取这个时间步长中所有的音符 保存在列表中
                 high_time_note = 0  # 这个时间步长中最高的音符
                 if current_note_ < len(pianoroll_list['main']):
-                    while pianoroll_list['main'][current_note_][0] < bar_iterator * 4 + (note_time_iterator + 1) * MELODY_TIME_STEP:  # 处理一个时间区段内的所有音符
+                    while pianoroll_list['main'][current_note_][0] <= bar_iterator * 4 + (note_time_iterator + 0.5) * 0.125:  # 处理一个时间区段内的所有音符
                         if pianoroll_list['main'][current_note_][1] > high_time_note:  # 如果这个音符的音高1高于这个时间步长的最高音 那么替换这个时间步长的最高音
                             high_time_note = pianoroll_list['main'][current_note_][1]
                         current_note_ += 1
@@ -197,63 +204,6 @@ class SaveMidiData:
             # 1.2.将这个小节的音符信息存储在train_data中
             self.melody_data[music_number_index].append(bar_melody_data)
         # print(self.melody_data[music_number_index])
-
-    def note_list_to_chord(self, note_set, saved_chord=0, tone=TONE_MAJOR, accompany_note_set=None):
-        if tone == TONE_MAJOR:
-            recommand_chord_list = [{0, 4, 7}, {5, 9, 0}, {7, 11, 2}, {9, 0, 4}, {2, 5, 9}, {4, 7, 11}]
-        elif tone == TONE_MINOR:
-            recommand_chord_list = [{0, 4, 9}, {2, 5, 9}, {4, 7, 11}, {0, 4, 7}, {5, 9, 0}, {7, 11, 2}]
-        else:
-            recommand_chord_list = []
-        # 1.把所有的音符全部转化到0-11
-        new_note_set = set()
-        for note in note_set:
-            new_note_set.add(note % 12)
-        # 2.note_set只有一个音符的情况
-        if len(new_note_set) == 1:
-            # 2.1.如果这一个音符属于上一个和弦 那么返回上一个和弦
-            if new_note_set.issubset(CHORD_DICT[saved_chord]):
-                return saved_chord
-            # 2.2.除此以外的其他情况 考虑两拍的全部音符 如果在此情况下能找到对应的和弦 则返回该和弦 否则返回0
-            if accompany_note_set:
-                return self.note_list_to_chord(note_set | accompany_note_set, saved_chord, tone, None)
-            else:
-                return 0
-        # 3.note_set中有两个音符的情况
-        if len(new_note_set) == 2:
-            # 3.1.如果这两个音符属于上一个和弦 那么返回上一个和弦
-            if new_note_set.issubset(CHORD_DICT[saved_chord]):
-                return saved_chord
-            # 3.2.如果这两个音符属于推荐和弦 返回该推荐和弦在和弦字典中的位置
-            for chord_iterator in range(len(recommand_chord_list)):
-                if new_note_set.issubset(recommand_chord_list[chord_iterator]):
-                    return CHORD_DICT.index(recommand_chord_list[chord_iterator])
-            # 3.3.除此以外的其他情况 考虑两拍的全部音符 如果在此情况下能找到对应的和弦 则返回该和弦 否则返回0
-            if accompany_note_set:
-                return self.note_list_to_chord(note_set | accompany_note_set, saved_chord, tone, None)
-            else:
-                return 0
-        # 4.note_set中有三个音符的情况 如果这个和弦在CHORD_DICT列表中 泽返回他在列表中的位置 否则返回未知和弦
-        if len(new_note_set) == 3:
-            try:
-                return CHORD_DICT.index(new_note_set)
-            except ValueError:
-                return 0
-        # 5.note_set中有多余三个音符的情况
-        if len(new_note_set) >= 4:
-            # 5.1.如果上一个和弦是它的子集 那么返回上一个和弦
-            if CHORD_DICT[saved_chord].issubset(new_note_set):
-                return saved_chord
-            # 5.2.如果推荐和弦中有和弦是它的子集 那么返回该推荐和弦在和弦字典中的位置
-            for chord_iterator in range(len(recommand_chord_list)):
-                if recommand_chord_list[chord_iterator].issubset(new_note_set):
-                    return CHORD_DICT.index(recommand_chord_list[chord_iterator])
-            # 5.3.如果和弦字典中有和弦是它的子集 那么返回它在列表中的位置
-            for chord_iterator in range(len(CHORD_DICT)):
-                if CHORD_DICT[chord_iterator].issubset(new_note_set):
-                    return chord_iterator
-            # 5.4.其他情况 返回未知和弦
-            return 0
 
     def get_chord_data(self, music_number_index, pianoroll_list, tone=TONE_MAJOR):
         # print(music_number_index)
@@ -269,7 +219,7 @@ class SaveMidiData:
             for note_time_iterator in range(round(4 / CHORD_TIME_STEP)):
                 # 1.1.读取这个时间步长中所有的音符 保存在列表中
                 if current_note_ < len(pianoroll_list['chord']):
-                    while pianoroll_list['chord'][current_note_][0] < bar_iterator * 4 + (note_time_iterator + 1) * CHORD_TIME_STEP:  # 处理一个时间区段内的所有音符
+                    while pianoroll_list['chord'][current_note_][0] <= bar_iterator * 4 + (note_time_iterator + 0.9375) * CHORD_TIME_STEP:  # 处理一个时间区段内的所有音符
                         raw_bar_data[note_time_iterator].add(pianoroll_list['chord'][current_note_][1])  # 只保存音高
                         current_note_ += 1
                         if current_note_ >= len(pianoroll_list['chord']):
@@ -283,9 +233,9 @@ class SaveMidiData:
                     bar_chord_data[note_time_iterator] = saved_chord
                 else:
                     if len(raw_bar_data[accompany_note_time]) == 0:  # 陪伴音符列表为空
-                        saved_chord = self.note_list_to_chord(raw_bar_data[note_time_iterator], saved_chord, tone, None)  # 音符列表转换为和弦 并将它保存起来
+                        saved_chord = NoteList2Chord(raw_bar_data[note_time_iterator], saved_chord, tone, None)  # 音符列表转换为和弦 并将它保存起来
                     else:  # 陪伴音符列表不为空
-                        saved_chord = self.note_list_to_chord(raw_bar_data[note_time_iterator], saved_chord, tone, raw_bar_data[accompany_note_time])  # 音符列表转换为和弦 并将它保存起来
+                        saved_chord = NoteList2Chord(raw_bar_data[note_time_iterator], saved_chord, tone, raw_bar_data[accompany_note_time])  # 音符列表转换为和弦 并将它保存起来
                     bar_chord_data[note_time_iterator] = saved_chord
             # 3.将这个小节的音符信息存储在chord_data中
             self.chord_data[music_number_index].append(bar_chord_data)

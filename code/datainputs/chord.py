@@ -19,6 +19,7 @@ class ChordTrainData:
                     melody_pattern_data[song_iterator][bar_iterator] = [0 for t in range(round(4 / MELODY_PATTERN_TIME_STEP))]
                 # 2.2.生成训练数据 输入内容是这两小节的主旋律和和弦 输出内容是这两拍的和弦
                 self.get_model_io_data(raw_chord_data[song_iterator], melody_pattern_data[song_iterator], continuous_bar_number_data[song_iterator])
+        self.chord_data = raw_chord_data
         # print('\n\n\n\n\n')
         # for t in self.input_data:
         #     print(t)

@@ -33,3 +33,18 @@ def ReadNoteDict(return_type):
     elif return_type == 0:
         rows = conn.execute('select max(id) from NoteDict')
         return list(rows)[0][0]
+
+NoteDict = ReadNoteDict(1)
+
+
+def GetSongToneList():
+    """
+    获取每一首歌的调式信息
+    :return:
+    """
+    conn = sqlite3.connect(DATASET_PATH)
+    tone_list = [None for t in range(TRAIN_FILE_NUMBERS)]
+    rows = conn.execute('select id, tone from SongInfo')
+    for row in rows:
+        tone_list[row[0] - 1] = row[1]
+    return tone_list

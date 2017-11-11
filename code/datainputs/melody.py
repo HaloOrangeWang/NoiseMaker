@@ -1,8 +1,9 @@
 from settings import *
 import tensorflow as tf
 from interfaces.sql.sqlite import GetRawSongDataFromDataset
-from interfaces.functions import CommonMusicPatterns, MusicPatternEncode
+from interfaces.functions import CommonMusicPatterns, MusicPatternEncode, GetDictMaxKey
 from models.KMeansModel import KMeansModel
+import copy
 
 
 def GetMelodyAverageNoteByBar(raw_melody_data):
@@ -189,13 +190,18 @@ class MelodyTrainData:
         # 1.从数据集中读取歌的编号为song_id且小节标注为mark_key的小节数据
         raw_train_data = GetRawSongDataFromDataset('main', tone_restrict)
         no_tone_restrict_melody_data = GetRawSongDataFromDataset('main', None)  # 没有旋律限制的主旋律数据　用于训练其他数据
+        self.raw_melody_data = copy.deepcopy(no_tone_restrict_melody_data)  # 最原始的主旋律数据
         self.continuous_bar_number_data = [[] for t in range(TRAIN_FILE_NUMBERS)]
         self.no_tone_restrict_continuous_bar_number_data = [[] for t in range(TRAIN_FILE_NUMBERS)]
+        self.keypress_pattern_dict = [[0 for t in range(16)]]
+        self.keypress_pattern_data = [[] for t in range(TRAIN_FILE_NUMBERS)]  # 三维数组 第一维是歌曲列表 第二维是小节编号 第三维是按键的组合（步长是2拍）
+        self.keypress_pattern_count = [0]
         # 2.获取最常见的主旋律组合
-        self.common_melody_patterns, self.melody_cluster_numbers = CommonMusicPatterns(raw_train_data, number=COMMON_MELODY_PATTERN_NUMBER, note_time_step=MELODY_TIME_STEP, pattern_time_step=MELODY_PATTERN_TIME_STEP)
+        self.common_melody_patterns, self.melody_pattern_number_list = CommonMusicPatterns(raw_train_data, number=COMMON_MELODY_PATTERN_NUMBER, note_time_step=MELODY_TIME_STEP, pattern_time_step=MELODY_PATTERN_TIME_STEP)
         # 3.生成输入输出数据
         for song_iterator in range(len(raw_train_data)):
             if no_tone_restrict_melody_data[song_iterator] != {}:  # 获取相关没有调式限制的相关数据
+                self.get_keypress_data(song_iterator, no_tone_restrict_melody_data[song_iterator])  # 获取按键数据 当前有按键记为1 没有按键记为0
                 self.no_tone_restrict_continuous_bar_number_data[song_iterator] = GetContinuousBarNumber(no_tone_restrict_melody_data[song_iterator])
                 no_tone_restrict_melody_data[song_iterator] = MelodyPatternEncode(self.common_melody_patterns, no_tone_restrict_melody_data[song_iterator], MELODY_TIME_STEP, MELODY_PATTERN_TIME_STEP).music_pattern_dict
             if raw_train_data[song_iterator] != {}:
@@ -220,6 +226,20 @@ class MelodyTrainData:
         # print('\n\n\n')
         # for t in self.output_data[:50]:
         #     print(t)
+
+    def get_keypress_data(self, song_iterator, melody_data):
+        for key in range(GetDictMaxKey(melody_data) + 1):
+            self.keypress_pattern_data[song_iterator].append([0, 0])
+            bar_keypress_data = [1 if t != 0 else 0 for t in melody_data[key]]
+            raw_pattern_list = [bar_keypress_data[16 * t: 16 * (t + 1)] for t in range(2)]
+            for bar_pattern_iterator, raw_pattern in enumerate(raw_pattern_list):
+                if raw_pattern not in self.keypress_pattern_dict:
+                    self.keypress_pattern_data[song_iterator][key][bar_pattern_iterator] = len(self.keypress_pattern_dict)
+                    self.keypress_pattern_dict.append(raw_pattern)
+                    self.keypress_pattern_count.append(1)
+                else:
+                    self.keypress_pattern_data[song_iterator][key][bar_pattern_iterator] = self.keypress_pattern_dict.index(raw_pattern)
+                    self.keypress_pattern_count[self.keypress_pattern_dict.index(raw_pattern)] += 1
 
     def get_model_io_data(self, melody_pattern_data, continuous_bar_number_data, melody_profile_data):
         """

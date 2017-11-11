@@ -1,4 +1,5 @@
 import mido
+from interfaces.functions import MinNumberExcept_1
 from settings import *
 
 
@@ -11,9 +12,15 @@ class GenerateDataFromMidiFile:
         self.marked_track_list = {}
         self.channel_list = []
         tracks = self.readfile(file_name)  # 1.获取一首歌的各个音轨
-        marked_note_list = self.get_marked_note_list(tracks, bias_time)  # 2.获取这首歌的音符列表 分音轨保存
+        marked_note_list = self.get_marked_note_list(tracks, bias_time, {'Main': 'main', 'Chord': 'chord', 'Drum': 'drum', 'Bass': 'bass'})  # 2.获取这首歌的音符列表 分音轨保存
+        chord_pref_note_list = self.get_multi_note_lists(tracks, bias_time, {'Cl': 'string', 'Cs': 'piano_guitar', 'Fill': 'fill'})  # Cl是音符间隔时间较长的和弦表达 通常是有string来表现;Cs是音符间隔时间较短的和弦表达 通常是由piano和guitar来表现
+        for key in chord_pref_note_list:  # 把两个marked_note_list合并为一个
+            marked_note_list[key] = chord_pref_note_list[key]
         pianoroll_list = self.generate_multi_pianoroll(marked_note_list)
         self.pianoroll_list = self.adjust_scale(pianoroll_list, scale)
+        self.pianoroll_list = self.adjust_chord_pref_scale(pianoroll_list)
+        # for key in pianoroll_list:
+        #     print(key, pianoroll_list[key])
 
     def readfile(self, file_name):
         mid = mido.MidiFile(file_name)
@@ -56,35 +63,61 @@ class GenerateDataFromMidiFile:
                 break
         return note_list
 
-    def get_marked_note_list(self, tracks, bias_time, eliminate=None):
+    def get_marked_note_list(self, tracks, bias_time, mark_name_dict):
+        """
+        按照音轨的功能将音符列表进行分类
+        :param tracks: 歌曲的所有音轨
+        :param bias_time: 偏移时间
+        :param mark_name_dict: 按照音轨名称中的关键词对音轨进行分类
+        :return: 分类后的音符列表
+        """
         marked_note_list = {'others': []}  # marked_note_list是四维列表。第一维是音轨标注，第二维是音轨，第三维是音轨中的音符，第四维是音符属性
         for track in tracks:
-            key = track.name
-            if key.startswith('Main'):
-                if eliminate is None or 'main' not in eliminate:
-                    if 'main' not in marked_note_list:
-                        marked_note_list['main'] = []
+            track_name = track.name
+            track_has_key = False  # 这个音轨中是否有mark_name_dict中的关键字
+            for key in mark_name_dict:
+                if key in track_name:  # 这个音轨里有mark_name_dict中的某个关键字
+                    mark = mark_name_dict[key]  # 这个音轨的标注为mark_name_dict中的某个关键字
+                    if mark not in marked_note_list:  # 保存的音符列表中还没有这个标注 新建这个标注
+                        marked_note_list[mark] = []
                     note_list = self.get_note_list(track, bias_time)
                     if note_list:
-                        marked_note_list['main'].append(note_list)
-            elif key.startswith('Chord'):
-                if eliminate is None or 'chord' not in eliminate:
-                    if 'chord' not in marked_note_list:
-                        marked_note_list['chord'] = []
-                    note_list = self.get_note_list(track, bias_time)
-                    if note_list:
-                        marked_note_list['chord'].append(note_list)
-            elif key.startswith('Drum'):
-                if eliminate is None or 'drum' not in eliminate:
-                    if 'drum' not in marked_note_list:
-                        marked_note_list['drum'] = []
-                    note_list = self.get_note_list(track, bias_time)
-                    if note_list:
-                        marked_note_list['drum'].append(note_list)
-            else:
+                        marked_note_list[mark].append(note_list)
+                    track_has_key = True
+            if not track_has_key:  # 这个音轨中没有mark_name_dict中的任何一个关键字 将音轨的音符列表保存在others中
                 note_list = self.get_note_list(track, bias_time)
                 if note_list:
                     marked_note_list['others'].append(note_list)
+        return marked_note_list
+
+    def get_multi_note_lists(self, tracks, bias_time, mark_name_dict):
+        """
+        按照音轨的功能将音符列表分类。
+        这个方法和上个方法的区别是这个方法只存储Track标记为Csx和Clx(x是数字，1/2/...)的音轨。
+        它们在存储时会对应piano guitar和string。
+        遇上个方法处理方法的区别是Cs1和Cs2等(以及Cl1和Cl2等）音轨在保存时不会被保存在一起 而是会分开保存。
+        :param tracks: 歌曲的所有音轨
+        :param bias_time: 偏移时间
+        :param mark_name_dict: 按照音轨名称中的关键词对音轨进行分类
+        :return: 分类后的音符列表
+        """
+        marked_note_list = {}  # marked_note_list是四维列表。第一维是音轨标注，第二维是音轨，第三维是音轨中的音符，第四维是音符属性
+        for track in tracks:
+            track_name = track.name
+            for key in mark_name_dict:
+                if key in track_name:  # 这个音轨里有mark_name_dict中的某个关键字
+                    mark = mark_name_dict[key]  # 这个音轨的标注为mark_name_dict中的某个关键字
+                    if track_name.find(key) + len(key) == len(track_name) or not track_name[track_name.find(key) + len(key)].isdigit():  # 如果不是以'xxx+数字'的形式写的话，数字置为1
+                        mark_number = '1'
+                    else:
+                        mark_number = track_name[track_name.find(key) + len(key)]  # 这个音轨的编号（以字符形式保存）（这个编号只能是0-9之间的整数因为只有一位）
+                    if mark + mark_number not in marked_note_list:  # 保存的音符列表中还没有编号为mark_number的mark标注 新建这个标注
+                        marked_note_list[mark + mark_number] = []
+                    note_list = self.get_note_list(track, bias_time)
+                    if note_list:
+                        marked_note_list[mark + mark_number].append(note_list)
+        # for key in marked_note_list:
+        #     print(key, marked_note_list[key])
         return marked_note_list
 
     def generate_pianoroll(self, note_list):
@@ -94,29 +127,24 @@ class GenerateDataFromMidiFile:
         """
         pianoroll_list = []
         track_note_number_list = []  # 这个二维列表的用途是存储每个track中已经存储了多少个音符
-        curr_beat = 0  # 当前的拍数
         for track_iterator in range(len(note_list)):  # 初始化channel_list
             track_note_number_list.append(0)
         while 1:
+            track_note_time_list = []  # 各个音轨中待加入音符在音乐中的时间
             for track_iterator in range(len(track_note_number_list)):
                 if track_note_number_list[track_iterator] == len(note_list[track_iterator]):
-                    continue
-                while 1:  # 加一个while处理逻辑是为了防止两个音符处在同一个time_step区间导致bug
-                    if track_note_number_list[track_iterator] == len(note_list[track_iterator]):
-                        break
-                    note_beat = note_list[track_iterator][track_note_number_list[track_iterator]][0]  # 音符所在的时间位置
-                    # print(channel_iterator, channel_list[channel_iterator], note_beat)
-                    if note_beat - curr_beat > 1 / 2 * MELODY_TIME_STEP:  # 这个音符的时间超过了当前时间 直接break
-                        break
-                    if abs(note_beat - curr_beat) <= 1 / 2 * MELODY_TIME_STEP:  # 这个音符所在时间为当前时间
-                        if note_list[track_iterator][track_note_number_list[track_iterator]][2] > 0:  # 不要音量为0的音
-                            pianoroll_list.append(
-                                [curr_beat, note_list[track_iterator][track_note_number_list[track_iterator]][1],
-                                 note_list[track_iterator][track_note_number_list[track_iterator]][2],
-                                 note_list[track_iterator][track_note_number_list[track_iterator]][3]])  # 把这个音添加到pianoroll_list中 但是这个音的时间并不是note_list中存储的时间而是curr_beat
-                            track_note_number_list[track_iterator] += 1
-            curr_beat += MELODY_TIME_STEP  # 这个时间步长处理完毕 进入下一个时间步长
-            # print(curr_beat)
+                    track_note_time_list.append(-1)
+                else:
+                    track_note_time_list.append(note_list[track_iterator][track_note_number_list[track_iterator]][0])  # 音符所在的时间位置
+            note_time, track_index = MinNumberExcept_1(track_note_time_list)  # 找出所在位置最靠前的那个音符
+            # print(note_time, track_index)
+            if note_list[track_index][track_note_number_list[track_index]][2] > 0:  # 不要音量为0的音
+                pianoroll_list.append([note_time,
+                                       note_list[track_index][track_note_number_list[track_index]][1],
+                                       note_list[track_index][track_note_number_list[track_index]][2],
+                                       note_list[track_index][track_note_number_list[track_index]][3]])  # 把这个音添加到pianoroll_list中 但是这个音的时间并不是note_list中存储的时间而是curr_beat
+            track_note_number_list[track_index] += 1
+            curr_beat = note_time
             # 跳出循环的条件是note_list的所有音都进入了pianoroll_list中
             flag_break = True
             for track_iterator in range(len(track_note_number_list)):
@@ -130,8 +158,8 @@ class GenerateDataFromMidiFile:
     def generate_multi_pianoroll(self, marked_note_list):
         pianoroll_list = {}
         for key in marked_note_list:
-            # print(key)
-            pianoroll_list[key] = self.generate_pianoroll(note_list=marked_note_list[key])
+            if bool(marked_note_list[key]):
+                pianoroll_list[key] = self.generate_pianoroll(note_list=marked_note_list[key])
         return pianoroll_list
 
     def adjust_scale(self, pianoroll_list, scale):
@@ -150,6 +178,29 @@ class GenerateDataFromMidiFile:
                 scale2 = scale - 12 * round(scale / 12)
                 for pianoroll_iterator in range(len(pianoroll_list[key])):
                     pianoroll_list[key][pianoroll_iterator][1] -= scale2  # 因为要转成C大调/A小调 这里是减而不是加
+        return pianoroll_list
+
+    def adjust_chord_pref_scale(self, pianoroll_list):
+        for key in pianoroll_list:
+            total_note = len(pianoroll_list[key])  # 这个列表中一共有多少个音符
+            if total_note == 0:
+                continue
+            sum_note_high = 0  # 这个列表中所有音符的音高总和
+            for note in pianoroll_list[key]:
+                sum_note_high += note[1]
+            average_note_high = sum_note_high / total_note  # 音符的平均音高
+            # print(key, average_note_high)
+            if key.startswith('piano_guitar'):
+                note_high_diff = average_note_high - PIANO_GUITAR_AVERAGE_NOTE  # 音符的平均音高与平均音高的期望值相差多少
+            elif key.startswith('string'):
+                note_high_diff = average_note_high - STRING_AVERAGE_NOTE
+            elif key.startswith('fill'):
+                note_high_diff = average_note_high - FILL_AVERAGE_NOTE
+            else:
+                continue
+            adjust_scale = 12 * round(note_high_diff / 12)  # 要调整的数量
+            for note_iterator in range(len(pianoroll_list[key])):
+                pianoroll_list[key][note_iterator][1] -= adjust_scale
         return pianoroll_list
 
 
@@ -176,7 +227,7 @@ def MultiPianoRoll2Midi(file_name, bpm, pianoroll_dict):
         for note_iterator in pianoroll_dict[key]['note']:
             note_list.append(['on', note_iterator[0], note_iterator[1], note_iterator[2]])
             note_list.append(['off', note_iterator[0] + note_iterator[3], note_iterator[1], note_iterator[2]])
-        note_list = sorted(note_list, key=lambda item:item[1])  # 按照音符的时间排序
+        note_list = sorted(note_list, key=lambda item: item[1])  # 按照音符的时间排序
         # 2.3.往tracks中保存这些音符
         current_note_time = 0
         for note_iterator in note_list:

@@ -18,6 +18,60 @@ def LastNotZeroNumber(array, reverse=False):
     return 0
 
 
+def MinNumberExcept_1(array):
+    """
+    找出一个数组中不是-1的最小数
+    :param array: 数组
+    :return: 这个最小数及其在数组中的位置（如果这个数组全部是-1则返回-1,len(array)）
+    """
+    min_number = max(array)
+    min_at = len(array)
+    for (i, t) in enumerate(array):
+        if t != -1 and t <= min_number:
+            min_number = t
+            min_at = i
+    return min_number, min_at
+
+
+def GetDictMaxKey(dic):
+    """
+    找出一个dict中最大的key值。这个dict中的所有key必须都为数字 且至少有一个正数
+    :param dic: 一个dict
+    :return: 它的最大key
+    """
+    max_key = -1
+    for key in dic:
+        if key > max_key:
+            max_key = key
+    return max_key
+
+
+def GetFirstIndexBigger(array, number):
+    """
+    找出一个数组中第一个大于number的元素
+    :param array: 数组
+    :param number:
+    :return: 第一个大于number的元素的位置及其值
+    """
+    for (i, t) in enumerate(array):
+        if t >= number:
+            return i, t
+    return -1, number - 1
+
+
+def GetFirstIndexSmaller(array, number):
+    """
+    找出一个数组中最后一个小于number的元素
+    :param array: 数组
+    :param number:
+    :return: 最后一个小于number的元素的位置及其值
+    """
+    for iterator in range(len(array) - 1, -1, -1):
+        if array[iterator] <= number:
+            return iterator, array[iterator]
+    return -1, number + 1
+
+
 def CommonMusicPatterns(raw_music_data, number, note_time_step, pattern_time_step):
     """
     获取最常见的number种旋律组合
@@ -35,19 +89,19 @@ def CommonMusicPatterns(raw_music_data, number, note_time_step, pattern_time_ste
                 try:
                     melody_pattern_list = [raw_music_data[song_iterator][key][time_step_ratio*t: time_step_ratio*(t+1)] for t in range(round(4 / pattern_time_step))]
                     for melody_pattern_iterator in melody_pattern_list:
-                            try:
-                                common_pattern_dict[str(melody_pattern_iterator)] += 1
-                            except KeyError:
-                                common_pattern_dict[str(melody_pattern_iterator)] = 1
+                        try:
+                            common_pattern_dict[str(melody_pattern_iterator)] += 1
+                        except KeyError:
+                            common_pattern_dict[str(melody_pattern_iterator)] = 1
                 except KeyError:
                     pass
     common_pattern_list_temp = sorted(common_pattern_dict.items(), key=lambda asd: asd[1], reverse=True)  # 按照次数由高到底排序
-    # print(len(common_melody_pattern_list))
+    # print(len(common_pattern_list_temp))
     # sum1 = 0
     # sum2 = 0
-    # for t in common_melody_pattern_list[1:]:
+    # for t in common_pattern_list_temp[1:]:
     #     sum1 += t[1]
-    # for t in common_melody_pattern_list[1: (number + 1)]:
+    # for t in common_pattern_list_temp[1: (number + 1)]:
     #     sum2 += t[1]
     # print(sum2 / sum1)
     common_pattern_list = []  # 最常见的number种组合
@@ -70,9 +124,9 @@ class MusicPatternEncode(object):
         for bar_data in music_data_list:
             # print(bar_iterator[0])
             bar_index = bar_data[0]  # 这个小节是这首歌的第几小节
-            raw_bar_pattern_list = [bar_data[1][time_step_ratio * t: time_step_ratio * (t + 1)] for t in range(round(4 / pattern_time_step))]  # 将音符列表按照pattern_time_step进行分割 使其变成二维数组
-            bar_pattern_list = self.handle_common_patterns(raw_bar_pattern_list, common_patterns)
-            bar_pattern_list = self.handle_rare_pattern(bar_index, bar_pattern_list, raw_bar_pattern_list, common_patterns)
+            bar_note_list = [bar_data[1][time_step_ratio * t: time_step_ratio * (t + 1)] for t in range(round(4 / pattern_time_step))]  # 将音符列表按照pattern_time_step进行分割 使其变成二维数组
+            bar_pattern_list = self.handle_common_patterns(bar_note_list, common_patterns)
+            bar_pattern_list = self.handle_rare_pattern(bar_index, bar_pattern_list, bar_note_list, common_patterns)
             self.music_pattern_dict[bar_data[0]] = bar_pattern_list  # 将编码后的pattern list保存在新的pattern dict中
 
     def handle_common_patterns(self, raw_bar_pattern_list, common_patterns):
