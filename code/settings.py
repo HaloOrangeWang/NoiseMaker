@@ -6,7 +6,8 @@ TONE_MAJOR = 0  # 大调是0 小调是1
 TONE_MINOR = 1
 
 DATASET_PATH = '../data.db'  # 数据集所在路径
-GENERATE_MIDIFILE_PATH = '../output.mid'  # 生成的midi文件所在路径
+GENERATE_MIDIFILE_PATH = '../09302.mid'  # 生成的midi文件所在路径
+LOGDIR = './log/sess'
 
 MELODY_PATTERN_TIME_STEP = 1  # 旋律组合的时间步长
 MELODY_TIME_STEP = 1/8  # 时间步长是八分之一拍
@@ -43,7 +44,8 @@ TRAIN_STRING_IO_BARS = 2  # 训练string时一次输入的小节数量
 FLAG_READ_MIDI_FILES = False
 FLAG_RUN_VALIDATION = False  # 是否运行验证内容 为True运行验证内容
 FLAG_RUN_MAIN = True  # 是狗运行主程序 为True运行主程序
-FLAG_IS_DEBUG = True  # 是否处于调试模式 如果为True 则程序运行会简化一些步骤，运行时间大约在七分钟左右（同时效果会比较差）。如果为False，程序运行会比较复杂，运行时间在一小时左右。
+FLAG_IS_DEBUG = False  # 是否处于调试模式 如果为True 则程序运行会简化一些步骤，运行时间大约在七分钟左右（同时效果会比较差）。如果为False，程序运行会比较复杂，运行时间在一小时左右。
+FLAG_IS_TRAINING = False  # 是否处于训练状态 为True则训练 为False则直接使用现成数据生成音乐
 
 MIN_GENERATE_BAR_NUMBER = 8  # 歌曲长度的下限
 MAX_GENERATE_BAR_NUMBER = 12  # 歌曲长度的上限
@@ -54,6 +56,10 @@ MAX_DRUM_GENERATE_FAIL_TIME = 10  # 最大可接受的的打击乐生成的不�
 MAX_BASS_GENERATE_FAIL_TIME = 60  # 最大可接受的的bass生成的不合要求的次数。超过此次数则打回从头生成
 MAX_PIANO_GUITAR_GENERATE_FAIL_TIME = 100  # 最大可接受的的piano_guitar生成的不合要求的次数。超过此次数则打回从头生成
 MAX_FILL_GENERATE_FAIL_TIME = 50
+
+SYSARGS = [  # 传入到程序中的参数
+    {'name': 'outputpath', 'type': str, 'default': None},
+]
 
 CHORD_DICT = [  # 和弦组合的词典 第1-6列分别是 大三 小三 增三 减三 挂二 挂四 共72个和弦
     {-1},  # 把0号位空出来 用作未知和弦

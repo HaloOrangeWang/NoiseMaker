@@ -167,7 +167,7 @@ def CommonFillPatterns(flatten_fill_data, note_time_step, pattern_time_step):
     for pattern_tuple in common_pattern_list_temp[:(COMMON_FILL_PATTERN_NUMBER + 1)]:
         common_pattern_list.append(eval(pattern_tuple[0]))
         pattern_number_list.append(pattern_tuple[1])
-    print(common_pattern_list)
+    # print(common_pattern_list)
     # print(pattern_number_list)
     return common_pattern_list, pattern_number_list
 

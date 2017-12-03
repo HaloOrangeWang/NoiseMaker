@@ -1,4 +1,6 @@
 import copy
+import argparse
+from settings import *
 
 
 def LastNotZeroNumber(array, reverse=False):
@@ -110,7 +112,7 @@ def CommonMusicPatterns(raw_music_data, number, note_time_step, pattern_time_ste
         # print(drum_pattern)
         common_pattern_list.append(eval(pattern_tuple[0]))
         pattern_number_list.append(pattern_tuple[1])
-    print(common_pattern_list)
+    # print(common_pattern_list)
     # print(pattern_number_list)
     return common_pattern_list, pattern_number_list
 
@@ -163,3 +165,11 @@ def MusicPatternDecode(common_patterns, pattern_list, note_time_step, pattern_ti
         else:
             note_list = note_list + common_patterns[pattern]
     return note_list
+
+
+def getsysargs():
+    parser = argparse.ArgumentParser()
+    for arg in SYSARGS:
+        parser.add_argument('--' + arg['name'], type=arg['type'], default=arg['default'])
+    args = parser.parse_args()
+    return args

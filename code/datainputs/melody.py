@@ -1,5 +1,4 @@
 from settings import *
-import tensorflow as tf
 from interfaces.sql.sqlite import GetRawSongDataFromDataset
 from interfaces.functions import CommonMusicPatterns, MusicPatternEncode, GetDictMaxKey
 from models.KMeansModel import KMeansModel
@@ -91,7 +90,7 @@ def GetMelodyProfileBySong(session, kmeans_model, cluster_center_points, raw_mel
     return attachment_array
 
 
-def GetMelodyCluster(tone_restrict=None):
+def DefineMelodyCluster(tone_restrict=None, train=True):
     # 1.从数据集中读取歌的编号为song_id且小节标注为main的小节数据
     raw_melody_data = GetRawSongDataFromDataset('main', tone_restrict)
     # 2.逐2小节地记录这首歌一个区间的平均音高
@@ -105,10 +104,14 @@ def GetMelodyCluster(tone_restrict=None):
     for melody_avr in melody_avr_list:
         flatten_melody_avr_list = flatten_melody_avr_list + melody_avr
     # 3.使用K均值算法，对输入的音乐按照两小节的平均音高分为10类
-    sess = tf.Session()
-    kmeans_model = KMeansModel(flatten_melody_avr_list, 10, 50)
+    # sess = tf.Session()
+    kmeans_model = KMeansModel(flatten_melody_avr_list, 10, 50, train)
+    return kmeans_model
+
+
+def CalMelodyCluster(kmeans_model, sess):
     cluster_center_points = kmeans_model.run(sess)
-    return sess, kmeans_model, cluster_center_points
+    return cluster_center_points
 
 
 class MelodyPatternEncode(MusicPatternEncode):
@@ -186,9 +189,9 @@ class MelodyTrainData:
     input_data = []  # 输入model的数据
     output_data = []  # 从model输出的数据
 
-    def __init__(self, session, kmeans_model, cluster_center_points, tone_restrict=None):
+    def __init__(self, tone_restrict=None):
         # 1.从数据集中读取歌的编号为song_id且小节标注为mark_key的小节数据
-        raw_train_data = GetRawSongDataFromDataset('main', tone_restrict)
+        self.raw_train_data = GetRawSongDataFromDataset('main', tone_restrict)
         no_tone_restrict_melody_data = GetRawSongDataFromDataset('main', None)  # 没有旋律限制的主旋律数据　用于训练其他数据
         self.raw_melody_data = copy.deepcopy(no_tone_restrict_melody_data)  # 最原始的主旋律数据
         self.continuous_bar_number_data = [[] for t in range(TRAIN_FILE_NUMBERS)]
@@ -197,27 +200,23 @@ class MelodyTrainData:
         self.keypress_pattern_data = [[] for t in range(TRAIN_FILE_NUMBERS)]  # 三维数组 第一维是歌曲列表 第二维是小节编号 第三维是按键的组合（步长是2拍）
         self.keypress_pattern_count = [0]
         # 2.获取最常见的主旋律组合
-        self.common_melody_patterns, self.melody_pattern_number_list = CommonMusicPatterns(raw_train_data, number=COMMON_MELODY_PATTERN_NUMBER, note_time_step=MELODY_TIME_STEP, pattern_time_step=MELODY_PATTERN_TIME_STEP)
+        self.common_melody_patterns, self.melody_pattern_number_list = CommonMusicPatterns(self.raw_train_data, number=COMMON_MELODY_PATTERN_NUMBER, note_time_step=MELODY_TIME_STEP, pattern_time_step=MELODY_PATTERN_TIME_STEP)
         # 3.生成输入输出数据
-        for song_iterator in range(len(raw_train_data)):
+        for song_iterator in range(len(self.raw_train_data)):
             if no_tone_restrict_melody_data[song_iterator] != {}:  # 获取相关没有调式限制的相关数据
                 self.get_keypress_data(song_iterator, no_tone_restrict_melody_data[song_iterator])  # 获取按键数据 当前有按键记为1 没有按键记为0
                 self.no_tone_restrict_continuous_bar_number_data[song_iterator] = GetContinuousBarNumber(no_tone_restrict_melody_data[song_iterator])
                 no_tone_restrict_melody_data[song_iterator] = MelodyPatternEncode(self.common_melody_patterns, no_tone_restrict_melody_data[song_iterator], MELODY_TIME_STEP, MELODY_PATTERN_TIME_STEP).music_pattern_dict
-            if raw_train_data[song_iterator] != {}:
+            if self.raw_train_data[song_iterator] != {}:
                 # 3.1.开头补上几个空小节 便于训练开头几小节的旋律数据
                 for bar_iterator in range(1 - TRAIN_MELODY_IO_BARS, 0):
-                    raw_train_data[song_iterator][bar_iterator] = [0 for t in range(round(4 / MELODY_TIME_STEP))]
+                    self.raw_train_data[song_iterator][bar_iterator] = [0 for t in range(round(4 / MELODY_TIME_STEP))]
                 # 3.2.获取歌曲的连续不为空的小节序号列表
-                self.continuous_bar_number_data[song_iterator] = GetContinuousBarNumber(raw_train_data[song_iterator])
-                # 3.3.使用K均值算法，对输入的音乐按照两小节的平均音高分为10类
-                melody_profile_data = GetMelodyProfileBySong(session, kmeans_model, cluster_center_points, raw_train_data[song_iterator])
+                self.continuous_bar_number_data[song_iterator] = GetContinuousBarNumber(self.raw_train_data[song_iterator])
                 # print(melody_profile_data)
                 # 3.4.将它的主旋律编码为常见的旋律组合。如果该旋律组合不常见，则记为COMMON_MELODY_PATTERN_NUMBER+1
-                raw_train_data[song_iterator] = MelodyPatternEncode(self.common_melody_patterns, raw_train_data[song_iterator], MELODY_TIME_STEP, MELODY_PATTERN_TIME_STEP).music_pattern_dict
-                # 3.5.生成训练数据 输入内容是当前时间 五小节的melody_profile 过去16拍的旋律组合，输出内容是当前时间 五小节的melody_profile 和错后一拍的旋律组合
-                self.get_model_io_data(raw_train_data[song_iterator], self.continuous_bar_number_data[song_iterator], melody_profile_data)
-        self.melody_pattern_data = raw_train_data
+                self.raw_train_data[song_iterator] = MelodyPatternEncode(self.common_melody_patterns, self.raw_train_data[song_iterator], MELODY_TIME_STEP, MELODY_PATTERN_TIME_STEP).music_pattern_dict
+        self.melody_pattern_data = self.raw_train_data
         self.no_tone_restrict_melody_pattern_data = no_tone_restrict_melody_data
         # print(len(self.input_data), len(self.output_data))
         # print('\n\n\n\n\n')
@@ -240,6 +239,14 @@ class MelodyTrainData:
                 else:
                     self.keypress_pattern_data[song_iterator][key][bar_pattern_iterator] = self.keypress_pattern_dict.index(raw_pattern)
                     self.keypress_pattern_count[self.keypress_pattern_dict.index(raw_pattern)] += 1
+
+    def get_total_io_data(self, session, kmeans_model, cluster_center_points):
+        for song_iterator in range(len(self.raw_train_data)):
+            if self.raw_train_data[song_iterator] != {}:
+                # 3.3.使用K均值算法，对输入的音乐按照两小节的平均音高分为10类
+                melody_profile_data = GetMelodyProfileBySong(session, kmeans_model, cluster_center_points, self.raw_train_data[song_iterator])
+                # 3.5.生成训练数据 输入内容是当前时间 五小节的melody_profile 过去16拍的旋律组合，输出内容是当前时间 五小节的melody_profile 和错后一拍的旋律组合
+                self.get_model_io_data(self.raw_train_data[song_iterator], self.continuous_bar_number_data[song_iterator], melody_profile_data)
 
     def get_model_io_data(self, melody_pattern_data, continuous_bar_number_data, melody_profile_data):
         """
