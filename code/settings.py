@@ -45,7 +45,7 @@ FLAG_READ_MIDI_FILES = False
 FLAG_RUN_VALIDATION = False  # 是否运行验证内容 为True运行验证内容
 FLAG_RUN_MAIN = True  # 是狗运行主程序 为True运行主程序
 FLAG_IS_DEBUG = False  # 是否处于调试模式 如果为True 则程序运行会简化一些步骤，运行时间大约在七分钟左右（同时效果会比较差）。如果为False，程序运行会比较复杂，运行时间在一小时左右。
-FLAG_IS_TRAINING = False  # 是否处于训练状态 为True则训练 为False则直接使用现成数据生成音乐
+FLAG_IS_TRAINING = True  # 是否处于训练状态 为True则训练 为False则直接使用现成数据生成音乐
 
 MIN_GENERATE_BAR_NUMBER = 8  # 歌曲长度的下限
 MAX_GENERATE_BAR_NUMBER = 12  # 歌曲长度的上限
