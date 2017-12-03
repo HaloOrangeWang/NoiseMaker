@@ -1,7 +1,7 @@
 # About
 《共享噪音》（Noise Maker）是我做的一个基于Tensorflow的自动生成儿歌的作品。
 
-[点此试听Noise Maker 0.93生成的音乐](http://v.youku.com/v_show/id_XMzE1MTU3NTUzNg==.html?spm=a2hzp.8244740.0.0)
+[点此试听Noise Maker生成的音乐](http://v.youku.com/v_show/id_XMzE1MTU3NTUzNg==.html?spm=a2hzp.8244740.0.0)
 
 如果大家觉得我这个程序做的不错，就请多多star+关注+分享哦！
 
@@ -10,9 +10,15 @@
 ```
 pip3 install -r whl_is_sb.txt
 ```
+* 运行前的准备
+```
+cd code
+mkdir log
+mkdir log/sess
+```
 * 训练样本并生成一段测试音乐
 ```
-python3 code/main.py
+python3 main.py
 ```
 * ```settings.py```里面有一个变量```FLAG_IS_DEBUG```。这个变量为True时，训练时间在十分钟左右，但是有比较高的概率会生成一段很烂的音乐。当这个变量为False时，训练师间在一小时左右，但是生成的音乐质量会稍微高一些。
 * 运行结束之后，会发现文件夹中多了一个output.mid，这个文件就是生成的音乐哦。
