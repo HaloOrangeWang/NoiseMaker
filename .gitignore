@@ -1,6 +1,7 @@
 MidiData/
 Outputs/*
 OldCode/
+test.py
 G.txt
 trash.txt
 *.mid
@@ -8,3 +9,11 @@ trash.txt
 .idea/
 __pycache__/
 log/
+*/secret.py
+.gitignore~
+whl_is_sb.txt~
+sf2/
+Diary/
+TrainData/TfLog
+TrainData/patterndata.db
+TrainData/backup

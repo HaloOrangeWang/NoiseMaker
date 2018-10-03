@@ -1,0 +1,1478 @@
+{
+    "skip": [14, 33, 46, 53, 69, 83, 112],
+    "Songs": [
+        {
+            "id": 1, 
+            "name": "买报歌",
+            "scale": 5,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0.5, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 2, 
+            "name": "鲁冰花",
+            "scale": -4,
+            "tone": "major",
+            "bpm": 58,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [6, 0, "main"], [14, 0, "sub"], [23, 0, "empty"]]
+        },
+        {
+            "id": 3, 
+            "name": "娃哈哈",
+            "scale": 5,
+            "tone": "minor",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 4, 
+            "name": "小燕子",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 84,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 5, 
+            "name": "两只老虎",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 130,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [10, 0, "main"], [18, 0, "main"], [26, 0, "main"], [34, 0, "empty"]]
+        },
+        {
+            "id": 6, 
+            "name": "让我们荡起双桨",
+            "scale": -10,
+            "tone": "minor",
+            "bpm": 88,
+            "bias": "-1/24", 
+            "sections_backup": "NotApplicable",  
+            "sections": [[0, 0, "empty"], [5, -1.5, "main"], [13.5, 0, "sub"], [19.5, 0, "empty"], [22.5, -1.5, "main"], [31, 0, "sub"], [37, 0, "empty"], [40, -1.5, "main"], [48.5, 0, "sub"], [54.5, 0, "empty"]] 
+        },
+        {
+            "id": 7, 
+            "name": "妈妈的吻",
+            "scale": 4,
+            "tone": "major",
+            "bpm": 64,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "main"], [8, 0, "sub"]]
+        },
+        {
+            "id": 8, 
+            "name": "听妈妈讲那过去的事情",
+            "scale": -4,
+            "tone": "major",
+            "bpm": 62,
+            "bias": -3, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [6, 0, "sub"], [10, 0, "sub"]]
+        },
+        {
+            "id": 9, 
+            "name": "洋娃娃和小熊跳舞",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "sub"], [8, 0, "main"], [12, 0, "sub"]]
+        },
+        {
+            "id": 10, 
+            "name": "春天在哪里",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 141,
+            "bias": 2, 
+            "sections": [[0, 0, "empty"], [6, 0, "main"], [14, 0, "sub"], [22, 0, "main"], [30, 0, "sub"], [38, 0, "main"], [46, 0, "sub"], [54, 0, "empty"], [70, 0, "main"], [78, 0, "sub"]], 
+            "sections_backup": [[0, 0, "empty"], [6, 0, "main"], [14, 0, "sub"], [22, 0, "main"], [30, 0, "sub"], [38, 0, "main"], [46, 0, "sub"], [54, 0, "empty"], [70, 0, "main"], [78, 0, "sub"], [86, 0, "main"], [94, 0, "sub"], [102, 0, "empty"]]
+        },
+        {
+            "id": 11, 
+            "name": "六一的歌",
+            "scale": -10,
+            "tone": "major",
+            "bpm": 108,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [5, 0, "main"], [17, 0, "sub"], [23, 0, "empty"], [27, 0, "main"], [39, 0, "sub"], [45, 0, "empty"], [49, 0, "main"], [61, 0, "sub"], [67, 0, "empty"], [71, 0, "main"], [83, 0, "sub"], [89, 0, "empty"]]
+        },
+        {
+            "id": 12, 
+            "name": "小小少年",
+            "scale": -1,
+            "tone": "major",
+            "bpm": 101,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "main"], [8, -1, "sub"], [12, -1, "sub"], [16, -1, "sub"], [20, -1, "sub"]]
+        },
+        {
+            "id": 13, 
+            "name": "小红帽",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 90,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "main"], [8, 0, "sub"]]
+        },
+        {
+            "id": 15, 
+            "name": "爸爸去哪儿",
+            "scale": 6,
+            "tone": "major",
+            "bpm": 102,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 16, 
+            "name": "毕业歌",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 84,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [9, -1, "main"], [17, 0, "sub"], [25, -1, "main"], [33, 0, "sub"], [41, -1, "main"], [49, 0, "sub"], [57, 0, "empty"]]
+        },
+        {
+            "id": 17, 
+            "name": "表情歌",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 115,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 18, 
+            "name": "捕鱼歌",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 19, 
+            "name": "采蘑菇的小姑娘",
+            "scale": 2,
+            "tone": "minor",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "main"]]
+        },
+        {
+            "id": 20, 
+            "name": "采蘑菇的小姑娘",
+            "scale": 8,
+            "tone": "minor",
+            "bpm": 112,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "main"], [9, 0, "sub"], [13, 0, "main"], [17, 0, "main"], [22, 0, "sub"]]
+        },
+        {
+            "id": 21, 
+            "name": "草原赞歌",
+            "scale": 7,
+            "tone": "minor",
+            "bpm": 125,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [17, 0, "main"], [21, 0, "main"], [25, 0, "middle"], [29, 0, "middle"], [34, 0, "sub"], [49, 0, "empty"], [56, 0, "main"], [60, 0, "main"], [64, 0, "middle"], [68, 0, "middle"], [73, 0, "sub"], [88, 0, "empty"]]
+        },
+        {
+            "id": 22, 
+            "name": "虫儿飞",
+            "scale": 24,
+            "tone": "major",
+            "bpm": 85,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [11, 0, "empty"], [12, 0, "main"], [20, 0, "empty"], [21, -2, "sub"], [32, 0, "empty"]]
+        },
+        {
+            "id": 23, 
+            "name": "大风歌",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 180,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [10, 0, "main"], [20, 0, "empty"]]
+        },
+        {
+            "id": 24, 
+            "name": "大头儿子小头爸爸",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 108,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 25, 
+            "name": "丢手绢",
+            "scale": 14,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 26, 
+            "name": "豆豆龙",
+            "scale": 3,
+            "tone": "major",
+            "bpm": 122,
+            "bias": -1, 
+            "sections": [[0, 0, "empty"], [1, -2, "main"], [12, -2, "main"], [22, 0, "empty"]]
+        },
+        {
+            "id": 27, 
+            "name": "读书郎",
+            "scale": -7,
+            "tone": "minor",
+            "bpm": 120,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [14.5, 0, "main"], [25, 0, "empty"]]
+        },
+        {
+            "id": 28, 
+            "name": "读书郎",
+            "scale": 5,
+            "tone": "minor",
+            "bpm": 110,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [14.5, 0, "main"], [25, 0, "empty"]]
+        },
+        {
+            "id": 29, 
+            "name": "多年以前",
+            "scale": -10,
+            "tone": "major",
+            "bpm": 140,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 30, 
+            "name": "歌唱二小放牛郎",
+            "scale": 3,
+            "tone": "minor",
+            "bpm": 71,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [6, 0, "main"], [14, 0, "empty"], [16, 0, "main"], [24, 0, "main"], [32, 0, "main"], [40, 0, "main"], [48, 0, "main"], [56, 0, "empty"], [58, 0, "main"], [66, 0, "empty"]]
+        },
+        {
+            "id": 31, 
+            "name": "歌声与微笑",
+            "scale": 3,
+            "tone": "minor",
+            "bpm": 183,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [17, 0, "main"], [25, 0, "main"], [33, 0, "sub"], [41, 0, "sub"], [49, 0, "main"], [57, 0, "main"], [65, 0, "sub"], [73, 0, "sub"], [81, 0, "empty"], [97, 0, "main"], [105, 0, "main"], [113, 0, "sub"], [121, 0, "sub"], [129, 0, "sub"], [137, 0, "sub"], [145, 0, "empty"]]
+        },
+        {
+            "id": 32, 
+            "name": "恭喜恭喜",
+            "scale": 15,
+            "tone": "minor",
+            "bpm": 97,
+            "bias": "-1/32", 
+            "sections": [[0, 0, "empty"], [14, 0, "main"], [20, 0, "main"], [26, 0, "empty"], [50, 0, "main"], [56, 0, "main"], [64, 0, "empty"]]
+        },
+        {
+            "id": 34, 
+            "name": "国旗真美丽",
+            "scale": -6,
+            "tone": "major",
+            "bpm": 165,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [20, 0, "main"], [40, 0, "sub"], [50, 0, "sub"]]
+        },
+        {
+            "id": 35, 
+            "name": "红星闪闪",
+            "scale": -2,
+            "tone": "major",
+            "bpm": 120,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [15, 0, "empty"], [24, 0, "middle"], [40, 0, "main"], [52, 0, "empty"]]
+        },
+        {
+            "id": 36, 
+            "name": "红星闪闪",
+            "scale": -2,
+            "tone": "major",
+            "bpm": 120,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [15, 0, "empty"], [24, 0, "middle"], [40, 0, "main"], [52, 0, "empty"]]
+        },
+        {
+            "id": 37, 
+            "name": "花仙子",
+            "scale": 7,
+            "tone": "major",
+            "bpm": 128,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [6, -1, "main"], [18, 0, "middle"], [26, 0, "sub"], [38, 0, "empty"], [42, -1, "main"], [50, 0, "middle"], [58, 0, "sub"], [66, -1, "main"], [70, 0, "middle"], [78, 0, "sub"], [86, -1, "main"], [90, 0, "empty"]]
+        },
+        {
+            "id": 38, 
+            "name": "花仙子",
+            "scale": 7,
+            "tone": "major",
+            "bpm": 160,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [6, -1, "main"], [18, 0, "middle"], [26, 0, "sub"], [34, 0, "empty"], [38, -1, "main"], [50, 0, "middle"], [58, 0, "sub"], [66, -1, "end"]]
+        },
+        {
+            "id": 39, 
+            "name": "活泼乐曲",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 110,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [1, 0, "main"], [5, 0, "main"], [9, 0, "sub"]]
+        },
+        {
+            "id": 40, 
+            "name": "机器猫",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 121,
+            "bias": "-11/24", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 41, 
+            "name": "教师节快乐",
+            "scale": -9,
+            "tone": "major",
+            "bpm": 76,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [18, 0, "empty"], [20, 0, "main"], [34, 0, "empty"], [36, 0, "main"], [50, 0, "empty"], [52, 0, "main"], [68, 0, "empty"]]
+        },
+        {
+            "id": 42, 
+            "name": "蓝精灵之歌",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 110,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [6, -1, "main"], [14, -1, "sub"], [22, 0, "empty"]]
+        },
+        {
+            "id": 43, 
+            "name": "懒惰虫",
+            "scale": -9,
+            "tone": "major",
+            "bpm": 60,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [5, -1, "main"]]
+        },
+        {
+            "id": 44, 
+            "name": "劳动最光荣",
+            "scale": -2,
+            "tone": "major",
+            "bpm": 110,
+            "bias": -2, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 45, 
+            "name": "雷锋，请听我回答",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 47, 
+            "name": "铃儿响叮当",
+            "scale": 4,
+            "tone": "major",
+            "bpm": 120,
+            "bias": "7/16", 
+            "sections": [[0, 0, "sub"], [8, 0, "main"], [16, 0, "sub"], [24, 0, "main"], [32, 0, "sub"], [40, 0, "main"], [48, 0, "sub"], [56, 0, "main"], [64, 0, "empty"]]
+        },
+        {
+            "id": 48, 
+            "name": "妈妈的吻",
+            "scale": 6,
+            "tone": "major",
+            "bpm": 62,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8.5, 0, "sub"], [16, 0, "empty"]]
+        },
+        {
+            "id": 49, 
+            "name": "妈妈格桑拉",
+            "scale": -7,
+            "tone": "minor",
+            "bpm": 66,
+            "bias": "-1/96", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 50, 
+            "name": "猫和老鼠",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [6, 0, "main"]]           
+        },
+        {
+            "id": 51, 
+            "name": "沐浴在阳光下",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 125,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [7, 0, "main"], [23, 0, "empty"], [29, 0, "main"], [45, 0, "empty"], [51, 0, "main"], [67, 0, "empty"], [73, 0, "main"], [90, 0, "empty"]]           
+        },
+        {
+            "id": 52, 
+            "name": "男孩和女孩",
+            "scale": -6,
+            "tone": "major",
+            "bpm": 160,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 54, 
+            "name": "牛奶歌",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 140,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [6, 0, "main"], [14, 0, "sub"], [22, 0, "main"], [30, 0, "empty"], [34, 0, "sub"], [42, 0, "main"], [50, 0, "main"], [58, 0, "empty"]]
+        },
+        {
+            "id": 55, 
+            "name": "泼水歌",
+            "scale": -9,
+            "tone": "major",
+            "bpm": 71,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 56, 
+            "name": "青草莓 红苹果",
+            "scale": -9,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [13, 0, "main"], [27, 0, "sub"], [36, 0, "sub"], [45, 0, "empty"], [54, 0, "main"], [68, 0, "sub"], [77, 0, "sub"], [86, 0, "sub"], [95, 0, "sub"], [104, 0, "empty"]]
+        },
+        {
+            "id": 57, 
+            "name": "捉泥鳅",
+            "scale": -12,
+            "tone": "minor",
+            "bpm": 104,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "middle"], [16, 0, "sub"], [20, 0, "main"], [24, 0, "middle"], [32, 0, "sub"], [36, 0, "main"], [44, 0, "middle"], [52, 0, "sub"], [56, 0, "sub"]]
+        },
+        {
+            "id": 58, 
+            "name": "人人齐欢笑",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 142,
+            "bias": -3, 
+            "sections": [[1, -1, "main"], [9, 0, "sub"]]
+        },
+        {
+            "id": 59, 
+            "name": "如果你开心你就拍拍手",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        }, 
+        {
+            "id": 60, 
+            "name": "如今家乡山连山",
+            "scale": -5,
+            "tone": "minor",
+            "bpm": 104,
+            "bias": "-1/96", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 61, 
+            "name": "赛船",
+            "scale": 3,
+            "tone": "major",
+            "bpm": 86,
+            "bias": "-1/48", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 62, 
+            "name": "三个和尚",
+            "scale": 1,
+            "tone": "major",
+            "bpm": 75,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 63, 
+            "name": "三只小熊",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 130,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 64, 
+            "name": "少年，少年，祖国的春天",
+            "scale": -8,
+            "tone": "major",
+            "bpm": 140,
+            "bias": 0, 
+            "sections_backup": [[0, 0, "empty"], [4, 1, "main"], [13, 1, "sub"], [22, 0, "empty"], [25, -1, "main"], [34, -1, "sub"], [43, 0, "empty"], [45, 1, "main"], [54, 1, "sub"], [63, 0, "empty"]],
+            "sections": [[0, 0, "empty"], [4.5, -1, "main"], [13.5, -1, "sub"], [22, 0, "empty"], [25, -1, "main"], [34, -1, "sub"], [43, 0, "empty"], [45.5, -1, "main"], [54.5, -1, "sub"], [63, 0, "empty"]]
+        },
+        {
+            "id": 65, 
+            "name": "拾稻穗的小姑娘",
+            "scale": 3,
+            "tone": "minor",
+            "bpm": 160,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [20, 0, "main"], [28, 0, "middle"], [36, 0, "sub"], [43, 0, "empty"], [63, 0, "main"], [71, 0, "middle"], [79, 0, "sub"]]
+        },
+        {
+            "id": 66, 
+            "name": "世上只有妈妈好",
+            "scale": -1,
+            "tone": "major",
+            "bpm": 67,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 67, 
+            "name": "数鸭子",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 68, 
+            "name": "数鸭子",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 105,
+            "bias": "1 + 7/24", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 70, 
+            "name": "思索",
+            "scale": 7,
+            "tone": "minor",
+            "bpm": 90,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [1, 0, "main"], [10, 0, "main"], [19, 0, "empty"], [28, 0, "main"], [37, 0, "main"], [52, 0, "empty"]]
+        },
+        {
+            "id": 71, 
+            "name": "送别李叔同",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 80,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "sub"], [16, 0, "main"]]
+        },
+        {
+            "id": 72, 
+            "name": "王老先生有块地",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 158,
+            "bias": 1, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 73, 
+            "name": "望月亮",
+            "scale": 4,
+            "tone": "major",
+            "bpm": 78,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [13, 0, "main"], [21, 0, "sub"], [29, 0, "end"], [33, 0, "empty"], [41, 0, "main"], [49, 0, "sub"], [57, 0, "end"], [65, 0, "empty"]]
+        },
+        {
+            "id": 74, 
+            "name": "问候歌",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 122,
+            "bias": 1, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 75, 
+            "name": "蜗牛与黄鹂鸟",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 88,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, 0, "main"], [8, 0, "sub"], [11, 0, "main"], [15, 0, "main"], [19, 0, "sub"]]
+        },
+        {
+            "id": 76, 
+            "name": "我爱北京天安门",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 112,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [10, 0, "sub"], [18, 0, "main"], [24, 0, "empty"]]
+        },
+        {
+            "id": 77, 
+            "name": "我是一条小青龙",
+            "scale": 12,
+            "tone": "major",
+            "bpm": 135,
+            "bias": 0.5, 
+            "sections": [[0, 0, "empty"], [4, -0.5, "main"], [20, 0, "sub"], [35, -0.5, "main"], [51, 0, "sub"]]
+        },
+        {
+            "id": 78, 
+            "name": "我愿做个好小孩",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 102,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 79, 
+            "name": "我在马路上捡到一分钱",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0.25, 
+            "sections": [[0, 0, "main"], [8, 0, "main"], [16, 0, "empty"]]
+        },
+        {
+            "id": 80, 
+            "name": "西风的话",
+            "scale": 3,
+            "tone": "major",
+            "bpm": 80,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [10, 0, "sub"], [18, 0, "empty"], [20, 0, "main"], [28, 0, "sub"], [36, 0, "empty"]]
+        },
+        {
+            "id": 81, 
+            "name": "向前冲",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 137,
+            "bias": 1, 
+            "sections": [[0, 0, "empty"], [16, 0, "main"], [24, 0, "main"], [32, -1.5, "sub"], [40, 0, "empty"], [72, 0, "main"], [80, 0, "main"], [88, -1.5, "sub"], [96, 0, "empty"]]
+        },
+        {
+            "id": 82, 
+            "name": "小号手",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 126,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [11, 0, "main"], [20, 0, "main"], [29, 0, "empty"]]
+        },
+        {
+            "id": 84, 
+            "name": "小螺号",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 106,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "sub"], [14, 0, "main"], [22, 0, "sub"]]
+        },
+        {
+            "id": 85, 
+            "name": "小螺号",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 106,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "sub"], [14, 0, "main"], [22, 0, "sub"]]
+        },
+        {
+            "id": 86, 
+            "name": "小毛驴",
+            "scale": -11,
+            "tone": "major",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 87, 
+            "name": "小蜜蜂",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 123,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 88, 
+            "name": "小松树",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 89, 
+            "name": "只要妈妈笑一笑",
+            "scale": -8,
+            "tone": "major",
+            "bpm": 108,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [11, 0, "sub"], [19, 0, "main"], [27, 0, "sub"], [35, 0, "empty"], [38, 0, "main"], [46, 0, "sub"], [54, 0, "main"], [62, 0, "sub"], [70, 0, "empty"]]
+        },
+        {
+            "id": 90, 
+            "name": "小兔子乖乖",
+            "scale": -3,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 91, 
+            "name": "小小世界",
+            "scale": 5,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "main"], [16, 0, "main"]]
+        },
+        {
+            "id": 92, 
+            "name": "小小萤火虫",
+            "scale": 5,
+            "tone": "major",
+            "bpm": 96,
+            "bias": -2, 
+            "sections": "NotApplicable"           
+        },
+        {
+            "id": 93, 
+            "name": "星仔走天涯",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 105,
+            "bias": 1, 
+            "sections": [[0, 0, "empty"], [6, -1, "main"], [15, 0, "sub"], [23, 0, "sub"], [31, 0, "empty"], [36, -1, "main"], [45, 0, "sub"], [53, 0, "sub"], [61, 0, "empty"]]  
+        },
+        {
+            "id": 94, 
+            "name": "小燕子",
+            "scale": -10,
+            "tone": "major",
+            "bpm": 78,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [5, 0, "main"], [14, 0, "main"], [25, 0, "empty"], [27, 0, "main"], [36, 0, "main"], [47, 0, "empty"]]           
+        },
+        {
+            "id": 95, 
+            "name": "幸福拍手歌",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [9, -1, "main"]]           
+        },
+        {
+            "id": 96, 
+            "name": "学习雷锋好榜样",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 125,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [14, 0, "main"], [24, 0, "main"], [34, 0, "main"], [44, 0, "empty"], [46, 0, "main"], [56, 0, "main"], [66, 0, "main"], [76, 0, "main"], [86, 0, "empty"]]
+        }, 
+        {
+            "id": 97, 
+            "name": "爷爷为我打月饼",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 110,
+            "bias": 0, 
+            "sections": "NotApplicable"      
+        },
+        {
+            "id": 98, 
+            "name": "一分钱",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 98,
+            "bias": 0, 
+            "sections": "NotApplicable"      
+        },
+        {
+            "id": 99, 
+            "name": "一个师傅仨徒弟",
+            "scale": 4,
+            "tone": "minor",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [5, 0, "main"], [13, 0, "sub"], [21, 0, "end"], [25, 0, "main"], [33, 0, "sub"], [41, 0, "end"], [45, 0, "empty"]]      
+        },
+        {
+            "id": 100, 
+            "name": "一只大雁在站岗",
+            "scale": -3,
+            "tone": "minor",
+            "bpm": 80,
+            "bias": "-(2 + 1/24)", 
+            "sections": "NotApplicable"    
+        },
+        {
+            "id": 101, 
+            "name": "雨花石",
+            "scale": 4,
+            "tone": "minor",
+            "bpm": 67,
+            "bias": "-1/96", 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [12, 0, "sub"], [20, 0, "end"]]    
+        },
+        {
+            "id": 102, 
+            "name": "找爸爸",
+            "scale": -14,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [5, -1, "main"], [14, 0, "sub"], [22, 0, "empty"], [27, -1, "main"], [36, 0, "sub"], [44, 0, "empty"]]    
+        },
+        {
+            "id": 103, 
+            "name": "找朋友",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 128,
+            "bias": 0, 
+            "sections": "NotApplicable"    
+        },
+        {
+            "id": 104, 
+            "name": "找朋友",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 128,
+            "bias": 0, 
+            "sections": "NotApplicable"    
+        },
+        {
+            "id": 105, 
+            "name": "只要妈妈露笑脸",
+            "scale": -8,
+            "tone": "major",
+            "bpm": 124,
+            "bias": "-(2 + 1/24)", 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [11, 0, "sub"], [19, 0, "main"], [27, 0, "sub"], [35, 0, "empty"]]   
+        },
+        {
+            "id": 106, 
+            "name": "中國少年先鋒隊隊歌",
+            "scale": -14,
+            "tone": "major",
+            "bpm": 113,
+            "bias": -1, 
+            "sections_backup": [[0, 0, "empty"], [5, 0, "main"], [17, 0, "middle"], [21, 0, "sub"], [29, 2, "main"], [41, 2, "middle"], [45, 2, "sub"]],   
+            "sections": [[0, 0, "empty"], [5, 0, "main"], [17, 0, "middle"], [21, 0, "sub"], [29.5, 0, "main"], [41.5, 0, "middle"], [45.5, 0, "sub"]]   
+        },
+        {
+            "id": 107, 
+            "name": "种太陽",
+            "scale": -2,
+            "tone": "major",
+            "bpm": 110,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, -1, "main"], [21, 0, "middle"], [25, 0, "sub"]]  
+        },
+        {
+            "id": 108, 
+            "name": "捉泥鳅",
+            "scale": -10,
+            "tone": "minor",
+            "bpm": 118,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [12, 0, "sub"], [16, 0, "empty"], [20, 0, "main"], [28, 0, "sub"], [32, 0, "empty"], [40, 0, "main"], [48, 0, "sub"], [52, 0, "sub"], [60, 0, "empty"]]  
+        },
+        {
+            "id": 109, 
+            "name": "最美丽",
+            "scale": 2,
+            "tone": "minor",
+            "bpm": 120,
+            "bias": "-1/24", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 110, 
+            "name": "放风筝",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 76,
+            "bias": 0, 
+            "sections_backup": [[0, 0, "empty"], [5, 0, "main"], [13, 0, "middle"], [17, 0, "sub"], [21, 2, "empty"], [26, 2, "main"], [34, 2, "middle"], [38, 2, "sub"], [46, 0, "empty"]],
+            "sections": [[0, 0, "empty"], [5, 0, "main"], [13, 0, "middle"], [17, 0, "sub"], [21.5, 0, "empty"], [26.5, 0, "main"], [34.5, 0, "middle"], [38.5, 0, "sub"], [46, 0, "empty"]]
+        },
+        {
+            "id": 111, 
+            "name": "粉刷匠",
+            "scale": 5,
+            "tone": "major",
+            "bpm": 100,
+            "bias": "5/96", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 113, 
+            "name": "小星星",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 114, 
+            "name": "玛丽有只小羊羔",
+            "scale": 5,
+            "tone": "major",
+            "bpm": 90,
+            "bias": "1/96", 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [10, -0.5, "main"], [18, -0.5, "main"], [26, -0.5, "main"]]
+        },
+        {
+            "id": 115, 
+            "name": "啊个好人",
+            "scale": -10,
+            "tone": "major",
+            "bpm": 65,
+            "bias": -2, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 116, 
+            "name": "菠菜",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 154,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 117, 
+            "name": "采菱",
+            "scale": -2,
+            "tone": "major",
+            "bpm": 70,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [7, 0, "middle"], [10, -0.5, "sub"], [15, 0, "empty"], [17, 0, "main"], [21, 0, "middle"], [24, -0.5, "sub"]]
+        },
+        {
+            "id": 118, 
+            "name": "打电话",
+            "scale": 4,
+            "tone": "major",
+            "bpm": 104,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [8, 0, "main"], [15, -2, "empty"]]
+        },
+        {
+            "id": 119, 
+            "name": "稻田里的火鸡",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 155,
+            "bias": -3, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 120, 
+            "name": "邋遢大王",
+            "scale": -15,
+            "tone": "major",
+            "bpm": 108,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [12, 0, "sub"], [21, 0, "main"], [29, 0, "sub"]]
+        },
+        {
+            "id": 121, 
+            "name": "风中的精灵",
+            "scale": -12,
+            "tone": "minor",
+            "bpm": 68,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 122, 
+            "name": "葫芦兄弟",
+            "scale": 3,
+            "tone": "minor",
+            "bpm": 145,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [16, 0, "sub"]]
+        },
+        {
+            "id": 123, 
+            "name": "黄鹂鸟",
+            "scale": -17,
+            "tone": "major",
+            "bpm": 60,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [1, 0, "main"], [5, 0, "main"],[9, 0, "sub"], [12, 0, "empty"]]
+        },
+        {
+            "id": 124, 
+            "name": "回收歌",
+            "scale": 2,
+            "tone": "minor",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [6, 0, "main"], [14, 0, "middle"], [18, 0, "sub"], [26, 0, "empty"], [31, 0, "main"], [39, 0, "middle"], [43, 0, "sub"]]
+        },
+        {
+            "id": 125, 
+            "name": "开心往前飞",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 138,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 126, 
+            "name": "看星星",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 127, 
+            "name": "兰花草",
+            "scale": 5,
+            "tone": "minor",
+            "bpm": 130,
+            "bias": "25/48", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 128, 
+            "name": "懒惰虫",
+            "scale": -9,
+            "tone": "major",
+            "bpm": 60,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [5, -1, "main"]]
+        },
+        {
+            "id": 129, 
+            "name": "懒羊羊当大厨",
+            "scale": 0,
+            "tone": "minor",
+            "bpm": 66,
+            "bias": -1, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [12, 0, "middle"], [16, -1, "sub"], [24, 0, "empty"], [30, 0, "main"], [38, 0, "middle"], [42, -1, "sub"], [50, 0, "empty"]]
+        },
+        {
+            "id": 130, 
+            "name": "去远方",
+            "scale": -10,
+            "tone": "minor",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [8, 0, "main"], [18, 0, "sub"], [26, 0, "empty"], [34, 0, "main"], [44, 0, "sub"], [58, 0, "empty"]]
+        },
+        {
+            "id": 131, 
+            "name": "稍息",
+            "scale": 4,
+            "tone": "major",
+            "bpm": 142,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 132, 
+            "name": "生产队里养了一群小鸭子",
+            "scale": -8,
+            "tone": "major",
+            "bpm": 87,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [3, 0, "main"], [13, 0, "main"]]
+        },
+        {
+            "id": 133, 
+            "name": "圣诞老人进城",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 160,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 134, 
+            "name": "舒克贝塔",
+            "scale": 5,
+            "tone": "major",
+            "bpm": 145,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [16, 0, "middle"], [20, 0, "empty"], [21, 0, "sub"]]
+        },
+        {
+            "id": 135, 
+            "name": "童谣",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 88,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 136, 
+            "name": "我爱洗澡",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 70,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 137, 
+            "name": "小娃娃吃西瓜",
+            "scale": -10,
+            "tone": "major",
+            "bpm": 130,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 138, 
+            "name": "校园多美好",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [10, 0, "sub"], [18, 0, "main"], [26, 0, "sub"], [34, 0, "empty"]]
+        },
+        {
+            "id": 139, 
+            "name": "星星点灯",
+            "scale": 4,
+            "tone": "minor",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 140, 
+            "name": "醒来了",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 141, 
+            "name": "雪人",
+            "scale": 0,
+            "tone": "minor",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [7, 0, "main"]]
+        },
+        {
+            "id": 142, 
+            "name": "一加一等于小可爱",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 96,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "main"], [16, 0, "sub"], [24, 0, "main"]]
+        },
+        {
+            "id": 143, 
+            "name": "知了",
+            "scale": -8,
+            "tone": "major",
+            "bpm": 75,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [16, 0, "main"]]
+        },
+        {
+            "id": 144, 
+            "name": "侏儒赛跑",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [17, -1, "sub"], [33, -1, "main"]]
+        },
+        {
+            "id": 145, 
+            "name": "直至消失",
+            "scale": -3,
+            "tone": "major",
+            "bpm": 74,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [5, -1, "sub"], [13, 0, "empty"], [16, 0, "main"], [24, -2.5, "middle"], [32, -1, "sub"], [40, 0, "empty"]]
+        },
+        {
+            "id": 146, 
+            "name": "鲁冰花",
+            "scale": -1,
+            "tone": "minor",
+            "bpm": 58,
+            "bias": "1/32", 
+            "sections": [[0, 0, "main"], [10, 0, "empty"], [12, 0, "main"], [20, 0, "sub"]]
+        },
+        {
+            "id": 147, 
+            "name": "两地书",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 73,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [13, 0, "sub"], [21, 0, "main"], [30, 0, "sub"], [38, 0, "empty"], [42, 0, "main"], [51, 0, "sub"], [59, 0, "main"], [68, 0, "sub"], [82, 0, "empty"]]
+        },
+        {
+            "id": 148, 
+            "name": "二月里来",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 94,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [2, 0, "main"], [10, 0, "main"], [18, 0, "main"], [26, 0, "main"]]
+        },
+        {
+            "id": 149, 
+            "name": "北方佬",
+            "scale": 19,
+            "tone": "major",
+            "bpm": 114,
+            "bias": 2, 
+            "sections": [[0, 0, "empty"], [2, -0.5, "main"], [10, 0, "empty"], [11, -0.5, "main"], [19, 0, "empty"], [20, -0.5, "main"], [28, 0, "empty"], [29, -0.5, "main"], [37, 0, "empty"]]
+        },
+        {
+            "id": 150, 
+            "name": "卡布利鸟",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 120,
+            "bias": -2.5, 
+            "sections": [[0, 0, "empty"], [1, -1.5, "main"], [9, -1.5, "main"], [17, 0, "sub"], [25, -1.5, "main"], [33, 0, "empty"]]
+        },
+        {
+            "id": 151, 
+            "name": "大胖呆",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 115,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 152, 
+            "name": "她会绕着山那边回來",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 100,
+            "bias": -2, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [9, -1, "main"], [17, 0, "empty"]]
+        },
+        {
+            "id": 153, 
+            "name": "寂寞的眼",
+            "scale": -2,
+            "tone": "major",
+            "bpm": 64,
+            "bias": -2.5, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 154, 
+            "name": "小草",
+            "scale": 0,
+            "tone": "minor",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [4, -1, "sub"], [12, 0, "sub"], [20, 0, "empty"]]
+        },
+        {
+            "id": 155, 
+            "name": "彩虹妹妹",
+            "scale": -12,
+            "tone": "minor",
+            "bpm": 115,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 156, 
+            "name": "我们的村庄",
+            "scale": -8,
+            "tone": "major",
+            "bpm": 114,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [3, -1, "main"], [11, -1, "middle"], [15, -1.5, "sub"], [30, 1, "end"]]
+        },
+        {
+            "id": 157, 
+            "name": "我们的田野",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 100,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, -1.5, "main"], [13, 0, "main"], [22, 0, "empty"], [26, -1.5, "main"], [35, -1.5, "main"], [44, -1.5, "main"], [53, -1, "empty"]]
+        },
+        {
+            "id": 158, 
+            "name": "我是一只小鸭子",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 150,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [20, 0, "main"]]
+        },
+        {
+            "id": 159, 
+            "name": "旋转木马",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 61,
+            "bias": -3.5, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [5, -1, "main"], [9, 0, "empty"]]
+        },
+        {
+            "id": 159, 
+            "name": "旋转木马",
+            "scale": 2,
+            "tone": "major",
+            "bpm": 61,
+            "bias": -3.5, 
+            "sections": [[0, 0, "empty"], [1, -1, "main"], [5, -1, "main"]]
+        },
+        {
+            "id": 160, 
+            "name": "春天到了",
+            "scale": 9,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "main"]]
+        },
+        {
+            "id": 161, 
+            "name": "渔光曲",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 130,
+            "bias": "-1/24", 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 162, 
+            "name": "美丽的河流",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 110,
+            "bias": 0, 
+            "sections": [[0, 0, "main"], [8, 0, "sub"]]
+        },
+        {
+            "id": 163, 
+            "name": "老人",
+            "scale": -7,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 2, 
+            "sections": [[0, 0, "main"], [4, 0, "main"], [8, 0, "main"], [12, 0, "empty"]]
+        },
+        {
+            "id": 164, 
+            "name": "老黑爵",
+            "scale": -12,
+            "tone": "major",
+            "bpm": 120,
+            "bias": 0, 
+            "sections": "NotApplicable"
+        },
+        {
+            "id": 165, 
+            "name": "长腿叔叔",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 125,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [11, 0, "main"], [28, -1, "sub"], [43, 0, "empty"], [50, 0, "main"], [67, -1, "sub"], [83, -1, "sub"], [98, 0, "empty"]]
+        },
+        {
+            "id": 166, 
+            "name": "静夜思",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 80,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [5, 0, "main"], [17, 0, "main"], [33, 0, "empty"]]
+        },
+        {
+            "id": 167, 
+            "name": "驼铃",
+            "scale": -9,
+            "tone": "minor",
+            "bpm": 124,
+            "bias": "-1/24", 
+            "sections": [[0, 0, "empty"], [4, 0, "main"], [12, 0, "sub"], [21, 0, "empty"], [25, 0, "main"], [33, 0, "sub"]]
+        },
+        {
+            "id": 168, 
+            "name": "鳟鱼",
+            "scale": -5,
+            "tone": "major",
+            "bpm": 80,
+            "bias": "-1/24", 
+            "sections_backup": "NotApplicable",
+            "sections": [[0, 0, "empty"], [3, -0.5, "main"], [13.5, -0.5, "main"], [24, -0.5, "sub"], [31, -0.5, "end"], [35, 0, "empty"]]
+        },
+        {
+            "id": 169, 
+            "name": "小雨点",
+            "scale": 0,
+            "tone": "major",
+            "bpm": 109,
+            "bias": 0, 
+            "sections": [[0, 0, "empty"], [13, 1, "main"], [21, -1.5, "sub"], [29, 0, "empty"], [33, 1, "main"], [41, -1.5, "sub"], [49, 0, "empty"], [53, 1, "main"], [61, -1.5, "sub"], [69, 0, "empty"], [73, 1, "main"], [81, -1.5, "sub"], [89, 1, "end"], [95, 1, "end"], [101, 1, "end"], [107, 1, "end"], [113, 0, "empty"]]
+        }
+    ]    
+}

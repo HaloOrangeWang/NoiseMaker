@@ -3,6 +3,8 @@
 # chord.py中是读取和弦数据并整理格式
 # drum.py是读取鼓点数据并整理格式
 # bass.py是读取bass数据并整理格式
+# piano_guitar.py是读取piano_guitar数据并整理格式
+# strings.py是读取弦乐数据并整理格式
 
 # 时间步长：
 # 主旋律音符的时间步长是八分之一拍 主旋律组合的时间步长是1拍

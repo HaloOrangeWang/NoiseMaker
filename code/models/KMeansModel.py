@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import random
+from interfaces.utils import DiaryLog
 
 
 class KMeansModel:
@@ -71,7 +72,7 @@ class KMeansModel:
             session.run(self.center_assigns, feed_dict={self.center_placeholder: location_vector})  # 为每个中心点分配更合适的值
         return session.run(self.center_points), session.run(self.attachments)  # 返回中心点的位置和输入值隶属情况
 
-    def run(self, session):
+    def cal_centers(self, session):
         # 计算中心点
         while True:
             centerpoints_legal = True  # 这里判断计算出的中心点有没有NaN
@@ -89,7 +90,7 @@ class KMeansModel:
                     break
             if not centerpoints_legal:
                 # print(centerpoint_array)
-                print('Center Point Failed!')
+                DiaryLog.warn('音符中心点的计算结果中出现了nan值，需要重新生成。')
             # 4.如果数组符合要求，则对其进行排序后返回
             if centerpoints_legal:
                 centerpoint_array.sort()  # 由小到大排序

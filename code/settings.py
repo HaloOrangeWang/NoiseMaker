@@ -5,17 +5,20 @@ GENERATE_MUSIC_TYPE = MUSIC_TYPE_CHILD  # 生成音乐类型
 TONE_MAJOR = 0  # 大调是0 小调是1
 TONE_MINOR = 1
 
-DATASET_PATH = '../data.db'  # 数据集所在路径
-GENERATE_MIDIFILE_PATH = '../09302.mid'  # 生成的midi文件所在路径
-LOGDIR = './log/sess'
+SECTION_EMPTY = 0  # 乐段的类型 包括了空、主歌、过渡副歌和尾声
+SECTION_MAIN = 1
+SECTION_MIDDLE = 2
+SECTION_SUB = 3
+SECTION_END = 4
 
-MELODY_PATTERN_TIME_STEP = 1  # 旋律组合的时间步长
-MELODY_TIME_STEP = 1/8  # 时间步长是八分之一拍
-CHORD_TIME_STEP = 1  # 和弦的时间步长 即我们认为每一拍和弦变化一次
-CHORD_GENERATE_TIME_STEP = 2  # 和弦生成的时间步长 我们认为每两拍生成一次和弦
-DRUM_TIME_STEP = 1/8  # 鼓的时间步长
-DRUM_PATTERN_TIME_STEP = 2  # 鼓点组合的时间步长
-# 另注：这些time_step如果进行修改，将必然会导致程序不能正常运行，需要重新编写datainputs和pipeline部分的代码
+DATASET_PATH = '../TrainData/rawdata.db'  # 数据集所在路径
+PATTERN_DATASET_PATH = '../TrainData/patterndata.db'  # pattern数据集的路径
+GENERATE_MIDIFILE_PATH = '../Outputs/096.mid'  # 生成的midi文件所在路径
+LOGDIR = '../TrainData/TfLog/sess'
+DIARY_PATH = '../Diary/%s/%02d%02d%02d-%04d.txt'  # 程序运行时的日志输出文件地址 ../Diary/Train(Test)/年月日-id.txt
+SOUNDFONT_PATH = '../sf2/FluidR3_GM.sf2'
+
+TRAIN_DATA_RADIO = 0.9  # 多大比例的数据用于训练（其余的用于验证）
 
 MELODY_LOW_NOTE = 48  # 主旋律音符的最低音和最高音(超过此限制则记为0）
 MELODY_HIGH_NOTE = 96
@@ -24,14 +27,16 @@ STRING_AVERAGE_NOTE = 62
 FILL_AVERAGE_NOTE = 75
 
 PIANO_GUITAR_AVERAGE_ROOT = 48  # 预期的根音平均值
+BASS_AVERAGE_ROOT = 36
 STRING_AVERAGE_ROOT = 60
 
 COMMON_MELODY_PATTERN_NUMBER = 250  # 常见的多少种主旋律的组合 这些个组合数量最好控制在100-500之间 它们占全部pattern的比例控制在90%-95%左右
 COMMON_DRUM_PATTERN_NUMBER = 300  # 常见的多少种打击乐的组合
-COMMON_BASS_PATTERN_NUMBER = 200  # 常见的多少种bass的组合
-COMMON_PIANO_GUITAR_PATTERN_NUMBER = 250  # 常见的多少种piano_guitar组合 250种占比78.3% 转化9.9%左右
-COMMON_STRING_PATTERN_NUMBER = 120  # 常见的多少种string的组合 120种占比81.6% 转化5.6%左右
+COMMON_BASS_PATTERN_NUMBER = 180  # 常见的多少种bass的组合 180种占比85.9% 转化3.7%左右
+COMMON_PIANO_GUITAR_PATTERN_NUMBER = 350  # 常见的多少种piano_guitar组合 350种占比81.6% 转化8.8%左右
+COMMON_STRING_PATTERN_NUMBER = 200  # 常见的多少种string的组合 200种占比87.3% 转化3%左右
 COMMON_FILL_PATTERN_NUMBER = 180  # 常见的多少种加花组合 180种占比84% 转化3.2%左右
+COMMON_CORE_NOTE_PATTERN_NUMBER = 400  # 常见的多少种骨干音组合（时长为2拍） 400种占比88.6% 转换1.3%左右
 
 TRAIN_FILE_NUMBERS = 169  # 训练集中有多少首歌
 TRAIN_MELODY_IO_BARS = 4  # 训练主旋律一次输入的小节数量
@@ -43,22 +48,34 @@ TRAIN_STRING_IO_BARS = 2  # 训练string时一次输入的小节数量
 
 FLAG_READ_MIDI_FILES = False
 FLAG_RUN_VALIDATION = False  # 是否运行验证内容 为True运行验证内容
-FLAG_RUN_MAIN = True  # 是狗运行主程序 为True运行主程序
+FLAG_RUN_MAIN = True  # 是否运行主程序 为True运行主程序
 FLAG_IS_DEBUG = False  # 是否处于调试模式 如果为True 则程序运行会简化一些步骤，运行时间大约在七分钟左右（同时效果会比较差）。如果为False，程序运行会比较复杂，运行时间在一小时左右。
 FLAG_IS_TRAINING = True  # 是否处于训练状态 为True则训练 为False则直接使用现成数据生成音乐
 
-MIN_GENERATE_BAR_NUMBER = 8  # 歌曲长度的下限
-MAX_GENERATE_BAR_NUMBER = 12  # 歌曲长度的上限
+MIN_GENERATE_BAR_NUMBER = float('nan')  # 歌曲长度的下限。这两个变量即将被删除
+MAX_GENERATE_BAR_NUMBER = float('nan')  # 歌曲长度的上限
+GENERATE_TONE = TONE_MAJOR  # 输出音乐的调式
 
-MAX_MELODY_GENERATE_FAIL_TIME = 25  # 最大可接受的的主旋律生成的不合要求的次数。超过此次数则打回从头生成
+MAX_MELODY_GENERATE_FAIL_TIME = 100  # 最大可接受的的主旋律生成的不合要求的次数。超过此次数则打回从头生成
+MAX_INTRO_GENERATE_FAIL_TIME = 100  # 最大可接受的的前奏生成的不合要求的次数。超过此次数则打回从头生成
 MAX_CHORD_GENERATE_FAIL_TIME = 30  # 最大可接受的的和弦生成的不合要求的次数。超过此次数则打回从头生成
 MAX_DRUM_GENERATE_FAIL_TIME = 10  # 最大可接受的的打击乐生成的不合要求的次数。超过此次数则打回从头生成
 MAX_BASS_GENERATE_FAIL_TIME = 60  # 最大可接受的的bass生成的不合要求的次数。超过此次数则打回从头生成
 MAX_PIANO_GUITAR_GENERATE_FAIL_TIME = 100  # 最大可接受的的piano_guitar生成的不合要求的次数。超过此次数则打回从头生成
+MAX_STRING_GENERATE_FAIL_TIME = 50
 MAX_FILL_GENERATE_FAIL_TIME = 50
+MAX_1SONG_GENERATE_FAIL_TIME = 10
+
+GENERATE_WAV = False  # 是否输出WAV文件（输出wav文件需要安装）
+
+REL_NOTE_COMPARE_DICT = {  # 和根音之间的绝对音高差和相对音高差的对照表
+    'Major': [[0, 0], [1, -1], [1, 0], [2, -1], [2, 0], [3, 0], [3, 1], [4, 0], [5, -1], [5, 0], [6, -1], [6, 0]],  # 大调
+    'Minor': [[0, 0], [1, -1], [1, 0], [2, 0], [2, 1], [3, 0], [3, 1], [4, 0], [5, 0], [5, 1], [6, 0], [6, 1]],  # 小调
+}
 
 SYSARGS = [  # 传入到程序中的参数
     {'name': 'outputpath', 'type': str, 'default': None},
+    {'name': 'diaryId', 'type': int, 'default': -1},
 ]
 
 CHORD_DICT = [  # 和弦组合的词典 第1-6列分别是 大三 小三 增三 减三 挂二 挂四 共72个和弦
