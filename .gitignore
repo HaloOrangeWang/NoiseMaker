@@ -15,5 +15,8 @@ whl_is_sb.txt~
 sf2/
 Diary/
 TrainData/TfLog
+TrainData/PatternLog
 TrainData/patterndata.db
 TrainData/backup
+/Inputs/*/*
+!/Inputs/*/manifest.json
