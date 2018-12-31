@@ -3,6 +3,8 @@
 
 [点此试听Noise Maker生成的音乐](http://v.youku.com/v_show/id_XMzE1MTU3NTUzNg==.html?spm=a2hzp.8244740.0.0)
 
+[点此阅读Noise Maker的设计实现文档](https://www.jianshu.com/nb/32878675)
+
 如果大家觉得我这个程序做的不错，就请多多star+关注+分享哦！
 
 # 程序运行方法
