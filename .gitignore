@@ -20,3 +20,4 @@ TrainData/patterndata.db
 TrainData/backup
 /Inputs/*/*
 !/Inputs/*/manifest.json
+*.PNG
